@@ -1,0 +1,36 @@
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.dll.config
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.pdb
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.SqlServer.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.xml
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.SqlServer.xml
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csprojAssemblyReference.cache
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csproj.CoreCompileInputs.cache
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csproj.CopyComplete
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\Proyecto\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.pdb
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.dll.config
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.dll
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.pdb
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.dll
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.xml
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csprojAssemblyReference.cache
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csproj.CoreCompileInputs.cache
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csproj.CopyComplete
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.dll
+C:\Users\Milagros\Desktop\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.pdb
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.dll.config
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\WCF_Notas.pdb
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.SqlServer.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.xml
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\bin\Debug\EntityFramework.SqlServer.xml
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csprojAssemblyReference.cache
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csproj.CoreCompileInputs.cache
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.csproj.CopyComplete
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.dll
+D:\Richard\ISIL 2019 - II\Desarrollo de Aplicaciones II\ProyectoAplicacionNotas\WCF_Notas\obj\Debug\WCF_Notas.pdb

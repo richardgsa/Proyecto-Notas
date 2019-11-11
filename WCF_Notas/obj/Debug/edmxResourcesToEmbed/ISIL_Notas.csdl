@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ISILNotasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ALUMNO">
+    <Key>
+      <PropertyRef Name="dni_alu" />
+    </Key>
+    <Property Name="dni_alu" Type="Int32" Nullable="false" />
+    <Property Name="app_alu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="apm_alu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="nom_alu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="direccion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="telefono" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="edad" Type="Int32" />
+    <Property Name="nacionalidad" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="id_carrera" Type="Int32" />
+    <Property Name="id_distrito" Type="Int32" />
+    <NavigationProperty Name="CARRERA" Relationship="Self.fk_alumno_id_carrera" FromRole="ALUMNO" ToRole="CARRERA" />
+    <NavigationProperty Name="DISTRITO" Relationship="Self.fk_alumno_id_distrito" FromRole="ALUMNO" ToRole="DISTRITO" />
+    <NavigationProperty Name="INCIDENCIA" Relationship="Self.fk_incidencia_dni_alu" FromRole="ALUMNO" ToRole="INCIDENCIA" />
+    <NavigationProperty Name="MATRICULA" Relationship="Self.fk_matricula_dni_alu" FromRole="ALUMNO" ToRole="MATRICULA" />
+  </EntityType>
+  <EntityType Name="CARRERA">
+    <Key>
+      <PropertyRef Name="id_carrera" />
+    </Key>
+    <Property Name="id_carrera" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ALUMNO" Relationship="Self.fk_alumno_id_carrera" FromRole="CARRERA" ToRole="ALUMNO" />
+  </EntityType>
+  <EntityType Name="CICLO">
+    <Key>
+      <PropertyRef Name="id_ciclo" />
+    </Key>
+    <Property Name="id_ciclo" Type="Int32" Nullable="false" />
+    <Property Name="fecha_ini" Type="DateTime" Precision="3" />
+    <Property Name="fecha_fin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="MATRICULA" Relationship="Self.fk_matricula_id_ciclo" FromRole="CICLO" ToRole="MATRICULA" />
+  </EntityType>
+  <EntityType Name="CLASE">
+    <Key>
+      <PropertyRef Name="id_clase" />
+    </Key>
+    <Property Name="id_clase" Type="Int32" Nullable="false" />
+    <Property Name="sesion" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="id_sede" Type="Int32" />
+    <NavigationProperty Name="SEDE" Relationship="Self.fk_clase_id_sede" FromRole="CLASE" ToRole="SEDE" />
+    <NavigationProperty Name="MATRICULA_CURSO_CLASE" Relationship="Self.fk_matricula_curso_clase_id_clase" FromRole="CLASE" ToRole="MATRICULA_CURSO_CLASE" />
+  </EntityType>
+  <EntityType Name="CURSO">
+    <Key>
+      <PropertyRef Name="id_curso" />
+    </Key>
+    <Property Name="id_curso" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="credito" Type="Int32" />
+    <Property Name="id_sede" Type="Int32" />
+    <NavigationProperty Name="SEDE" Relationship="Self.fk_curso_id_sede" FromRole="CURSO" ToRole="SEDE" />
+    <NavigationProperty Name="MATRICULA_CURSO" Relationship="Self.fk_matricula_curso_id_curso" FromRole="CURSO" ToRole="MATRICULA_CURSO" />
+    <NavigationProperty Name="PROFESOR_CURSO" Relationship="Self.fk_profesor_curso_id_curso" FromRole="CURSO" ToRole="PROFESOR_CURSO" />
+  </EntityType>
+  <EntityType Name="DISTRITO">
+    <Key>
+      <PropertyRef Name="id_distrito" />
+    </Key>
+    <Property Name="id_distrito" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ALUMNO" Relationship="Self.fk_alumno_id_distrito" FromRole="DISTRITO" ToRole="ALUMNO" />
+    <NavigationProperty Name="PROFESOR" Relationship="Self.fk_profesor_id_distrito" FromRole="DISTRITO" ToRole="PROFESOR" />
+  </EntityType>
+  <EntityType Name="INCIDENCIA">
+    <Key>
+      <PropertyRef Name="id_incidencia" />
+    </Key>
+    <Property Name="id_incidencia" Type="Int32" Nullable="false" />
+    <Property Name="impacto" Type="Boolean" />
+    <Property Name="impacto_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="dni_alu" Type="Int32" />
+    <NavigationProperty Name="ALUMNO" Relationship="Self.fk_incidencia_dni_alu" FromRole="INCIDENCIA" ToRole="ALUMNO" />
+  </EntityType>
+  <EntityType Name="MATRICULA">
+    <Key>
+      <PropertyRef Name="id_matricula" />
+    </Key>
+    <Property Name="id_matricula" Type="Int32" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="dni_alu" Type="Int32" />
+    <Property Name="id_ciclo" Type="Int32" />
+    <NavigationProperty Name="ALUMNO" Relationship="Self.fk_matricula_dni_alu" FromRole="MATRICULA" ToRole="ALUMNO" />
+    <NavigationProperty Name="CICLO" Relationship="Self.fk_matricula_id_ciclo" FromRole="MATRICULA" ToRole="CICLO" />
+    <NavigationProperty Name="MATRICULA_CURSO" Relationship="Self.fk_matricula_curso_id_matricula" FromRole="MATRICULA" ToRole="MATRICULA_CURSO" />
+  </EntityType>
+  <EntityType Name="MATRICULA_CURSO">
+    <Key>
+      <PropertyRef Name="id_matricula_curso" />
+    </Key>
+    <Property Name="id_matricula_curso" Type="Int32" Nullable="false" />
+    <Property Name="id_matricula" Type="Int32" />
+    <Property Name="id_curso" Type="Int32" />
+    <NavigationProperty Name="CURSO" Relationship="Self.fk_matricula_curso_id_curso" FromRole="MATRICULA_CURSO" ToRole="CURSO" />
+    <NavigationProperty Name="MATRICULA" Relationship="Self.fk_matricula_curso_id_matricula" FromRole="MATRICULA_CURSO" ToRole="MATRICULA" />
+    <NavigationProperty Name="MATRICULA_CURSO_CLASE" Relationship="Self.fk_matricula_curso_clase_id_matricula_curso" FromRole="MATRICULA_CURSO" ToRole="MATRICULA_CURSO_CLASE" />
+    <NavigationProperty Name="NOTA" Relationship="Self.fk_nota_id_matricula_curso" FromRole="MATRICULA_CURSO" ToRole="NOTA" />
+  </EntityType>
+  <EntityType Name="MATRICULA_CURSO_CLASE">
+    <Key>
+      <PropertyRef Name="id_matricula_curso_clase" />
+    </Key>
+    <Property Name="id_matricula_curso_clase" Type="Int32" Nullable="false" />
+    <Property Name="id_matricula_curso" Type="Int32" />
+    <Property Name="id_clase" Type="Int32" />
+    <Property Name="asistencia" Type="Boolean" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CLASE" Relationship="Self.fk_matricula_curso_clase_id_clase" FromRole="MATRICULA_CURSO_CLASE" ToRole="CLASE" />
+    <NavigationProperty Name="MATRICULA_CURSO" Relationship="Self.fk_matricula_curso_clase_id_matricula_curso" FromRole="MATRICULA_CURSO_CLASE" ToRole="MATRICULA_CURSO" />
+  </EntityType>
+  <EntityType Name="NOTA">
+    <Key>
+      <PropertyRef Name="id_nota" />
+    </Key>
+    <Property Name="id_nota" Type="Int32" Nullable="false" />
+    <Property Name="valor" Type="Double" />
+    <Property Name="id_tipo_nota" Type="Int32" />
+    <Property Name="id_matricula_curso" Type="Int32" />
+    <NavigationProperty Name="MATRICULA_CURSO" Relationship="Self.fk_nota_id_matricula_curso" FromRole="NOTA" ToRole="MATRICULA_CURSO" />
+    <NavigationProperty Name="TIPO_NOTA" Relationship="Self.fk_nota_id_tipo_nota" FromRole="NOTA" ToRole="TIPO_NOTA" />
+  </EntityType>
+  <EntityType Name="PROFESOR">
+    <Key>
+      <PropertyRef Name="dni_pro" />
+    </Key>
+    <Property Name="dni_pro" Type="Int32" Nullable="false" />
+    <Property Name="app_pro" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="apm_pro" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="nom_pro" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="direccion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="id_distrito" Type="Int32" />
+    <NavigationProperty Name="DISTRITO" Relationship="Self.fk_profesor_id_distrito" FromRole="PROFESOR" ToRole="DISTRITO" />
+    <NavigationProperty Name="PROFESOR_CURSO" Relationship="Self.fk_profesor_curso_dni_pro" FromRole="PROFESOR" ToRole="PROFESOR_CURSO" />
+  </EntityType>
+  <EntityType Name="PROFESOR_CURSO">
+    <Key>
+      <PropertyRef Name="id_profesor_curso" />
+    </Key>
+    <Property Name="id_profesor_curso" Type="Int32" Nullable="false" />
+    <Property Name="id_curso" Type="Int32" />
+    <Property Name="dni_pro" Type="Int32" />
+    <NavigationProperty Name="CURSO" Relationship="Self.fk_profesor_curso_id_curso" FromRole="PROFESOR_CURSO" ToRole="CURSO" />
+    <NavigationProperty Name="PROFESOR" Relationship="Self.fk_profesor_curso_dni_pro" FromRole="PROFESOR_CURSO" ToRole="PROFESOR" />
+  </EntityType>
+  <EntityType Name="SEDE">
+    <Key>
+      <PropertyRef Name="id_sede" />
+    </Key>
+    <Property Name="id_sede" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CLASE" Relationship="Self.fk_clase_id_sede" FromRole="SEDE" ToRole="CLASE" />
+    <NavigationProperty Name="CURSO" Relationship="Self.fk_curso_id_sede" FromRole="SEDE" ToRole="CURSO" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TIPO_NOTA">
+    <Key>
+      <PropertyRef Name="id_tipo_nota" />
+    </Key>
+    <Property Name="id_tipo_nota" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NOTA" Relationship="Self.fk_nota_id_tipo_nota" FromRole="TIPO_NOTA" ToRole="NOTA" />
+  </EntityType>
+  <Association Name="fk_alumno_id_carrera">
+    <End Role="CARRERA" Type="Self.CARRERA" Multiplicity="0..1" />
+    <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARRERA">
+        <PropertyRef Name="id_carrera" />
+      </Principal>
+      <Dependent Role="ALUMNO">
+        <PropertyRef Name="id_carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_alumno_id_distrito">
+    <End Role="DISTRITO" Type="Self.DISTRITO" Multiplicity="0..1" />
+    <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DISTRITO">
+        <PropertyRef Name="id_distrito" />
+      </Principal>
+      <Dependent Role="ALUMNO">
+        <PropertyRef Name="id_distrito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_incidencia_dni_alu">
+    <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="0..1" />
+    <End Role="INCIDENCIA" Type="Self.INCIDENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ALUMNO">
+        <PropertyRef Name="dni_alu" />
+      </Principal>
+      <Dependent Role="INCIDENCIA">
+        <PropertyRef Name="dni_alu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_matricula_dni_alu">
+    <End Role="ALUMNO" Type="Self.ALUMNO" Multiplicity="0..1" />
+    <End Role="MATRICULA" Type="Self.MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ALUMNO">
+        <PropertyRef Name="dni_alu" />
+      </Principal>
+      <Dependent Role="MATRICULA">
+        <PropertyRef Name="dni_alu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_matricula_id_ciclo">
+    <End Role="CICLO" Type="Self.CICLO" Multiplicity="0..1" />
+    <End Role="MATRICULA" Type="Self.MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CICLO">
+        <PropertyRef Name="id_ciclo" />
+      </Principal>
+      <Dependent Role="MATRICULA">
+        <PropertyRef Name="id_ciclo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_clase_id_sede">
+    <End Role="SEDE" Type="Self.SEDE" Multiplicity="0..1" />
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEDE">
+        <PropertyRef Name="id_sede" />
+      </Principal>
+      <Dependent Role="CLASE">
+        <PropertyRef Name="id_sede" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_matricula_curso_clase_id_clase">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="0..1" />
+    <End Role="MATRICULA_CURSO_CLASE" Type="Self.MATRICULA_CURSO_CLASE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="id_clase" />
+      </Principal>
+      <Dependent Role="MATRICULA_CURSO_CLASE">
+        <PropertyRef Name="id_clase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_curso_id_sede">
+    <End Role="SEDE" Type="Self.SEDE" Multiplicity="0..1" />
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEDE">
+        <PropertyRef Name="id_sede" />
+      </Principal>
+      <Dependent Role="CURSO">
+        <PropertyRef Name="id_sede" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_matricula_curso_id_curso">
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="0..1" />
+    <End Role="MATRICULA_CURSO" Type="Self.MATRICULA_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="id_curso" />
+      </Principal>
+      <Dependent Role="MATRICULA_CURSO">
+        <PropertyRef Name="id_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_profesor_curso_id_curso">
+    <End Role="CURSO" Type="Self.CURSO" Multiplicity="0..1" />
+    <End Role="PROFESOR_CURSO" Type="Self.PROFESOR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CURSO">
+        <PropertyRef Name="id_curso" />
+      </Principal>
+      <Dependent Role="PROFESOR_CURSO">
+        <PropertyRef Name="id_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_profesor_id_distrito">
+    <End Role="DISTRITO" Type="Self.DISTRITO" Multiplicity="0..1" />
+    <End Role="PROFESOR" Type="Self.PROFESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DISTRITO">
+        <PropertyRef Name="id_distrito" />
+      </Principal>
+      <Dependent Role="PROFESOR">
+        <PropertyRef Name="id_distrito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_matricula_curso_id_matricula">
+    <End Role="MATRICULA" Type="Self.MATRICULA" Multiplicity="0..1" />
+    <End Role="MATRICULA_CURSO" Type="Self.MATRICULA_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MATRICULA">
+        <PropertyRef Name="id_matricula" />
+      </Principal>
+      <Dependent Role="MATRICULA_CURSO">
+        <PropertyRef Name="id_matricula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_matricula_curso_clase_id_matricula_curso">
+    <End Role="MATRICULA_CURSO" Type="Self.MATRICULA_CURSO" Multiplicity="0..1" />
+    <End Role="MATRICULA_CURSO_CLASE" Type="Self.MATRICULA_CURSO_CLASE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MATRICULA_CURSO">
+        <PropertyRef Name="id_matricula_curso" />
+      </Principal>
+      <Dependent Role="MATRICULA_CURSO_CLASE">
+        <PropertyRef Name="id_matricula_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_nota_id_matricula_curso">
+    <End Role="MATRICULA_CURSO" Type="Self.MATRICULA_CURSO" Multiplicity="0..1" />
+    <End Role="NOTA" Type="Self.NOTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MATRICULA_CURSO">
+        <PropertyRef Name="id_matricula_curso" />
+      </Principal>
+      <Dependent Role="NOTA">
+        <PropertyRef Name="id_matricula_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_nota_id_tipo_nota">
+    <End Role="TIPO_NOTA" Type="Self.TIPO_NOTA" Multiplicity="0..1" />
+    <End Role="NOTA" Type="Self.NOTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_NOTA">
+        <PropertyRef Name="id_tipo_nota" />
+      </Principal>
+      <Dependent Role="NOTA">
+        <PropertyRef Name="id_tipo_nota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_profesor_curso_dni_pro">
+    <End Role="PROFESOR" Type="Self.PROFESOR" Multiplicity="0..1" />
+    <End Role="PROFESOR_CURSO" Type="Self.PROFESOR_CURSO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROFESOR">
+        <PropertyRef Name="dni_pro" />
+      </Principal>
+      <Dependent Role="PROFESOR_CURSO">
+        <PropertyRef Name="dni_pro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ISILNotasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ALUMNO" EntityType="Self.ALUMNO" />
+    <EntitySet Name="CARRERA" EntityType="Self.CARRERA" />
+    <EntitySet Name="CICLO" EntityType="Self.CICLO" />
+    <EntitySet Name="CLASE" EntityType="Self.CLASE" />
+    <EntitySet Name="CURSO" EntityType="Self.CURSO" />
+    <EntitySet Name="DISTRITO" EntityType="Self.DISTRITO" />
+    <EntitySet Name="INCIDENCIA" EntityType="Self.INCIDENCIA" />
+    <EntitySet Name="MATRICULA" EntityType="Self.MATRICULA" />
+    <EntitySet Name="MATRICULA_CURSO" EntityType="Self.MATRICULA_CURSO" />
+    <EntitySet Name="MATRICULA_CURSO_CLASE" EntityType="Self.MATRICULA_CURSO_CLASE" />
+    <EntitySet Name="NOTA" EntityType="Self.NOTA" />
+    <EntitySet Name="PROFESOR" EntityType="Self.PROFESOR" />
+    <EntitySet Name="PROFESOR_CURSO" EntityType="Self.PROFESOR_CURSO" />
+    <EntitySet Name="SEDE" EntityType="Self.SEDE" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TIPO_NOTA" EntityType="Self.TIPO_NOTA" />
+    <AssociationSet Name="fk_alumno_id_carrera" Association="Self.fk_alumno_id_carrera">
+      <End Role="CARRERA" EntitySet="CARRERA" />
+      <End Role="ALUMNO" EntitySet="ALUMNO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_alumno_id_distrito" Association="Self.fk_alumno_id_distrito">
+      <End Role="DISTRITO" EntitySet="DISTRITO" />
+      <End Role="ALUMNO" EntitySet="ALUMNO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_incidencia_dni_alu" Association="Self.fk_incidencia_dni_alu">
+      <End Role="ALUMNO" EntitySet="ALUMNO" />
+      <End Role="INCIDENCIA" EntitySet="INCIDENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_matricula_dni_alu" Association="Self.fk_matricula_dni_alu">
+      <End Role="ALUMNO" EntitySet="ALUMNO" />
+      <End Role="MATRICULA" EntitySet="MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_matricula_id_ciclo" Association="Self.fk_matricula_id_ciclo">
+      <End Role="CICLO" EntitySet="CICLO" />
+      <End Role="MATRICULA" EntitySet="MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_clase_id_sede" Association="Self.fk_clase_id_sede">
+      <End Role="SEDE" EntitySet="SEDE" />
+      <End Role="CLASE" EntitySet="CLASE" />
+    </AssociationSet>
+    <AssociationSet Name="fk_matricula_curso_clase_id_clase" Association="Self.fk_matricula_curso_clase_id_clase">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="MATRICULA_CURSO_CLASE" EntitySet="MATRICULA_CURSO_CLASE" />
+    </AssociationSet>
+    <AssociationSet Name="fk_curso_id_sede" Association="Self.fk_curso_id_sede">
+      <End Role="SEDE" EntitySet="SEDE" />
+      <End Role="CURSO" EntitySet="CURSO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_matricula_curso_id_curso" Association="Self.fk_matricula_curso_id_curso">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="MATRICULA_CURSO" EntitySet="MATRICULA_CURSO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_profesor_curso_id_curso" Association="Self.fk_profesor_curso_id_curso">
+      <End Role="CURSO" EntitySet="CURSO" />
+      <End Role="PROFESOR_CURSO" EntitySet="PROFESOR_CURSO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_profesor_id_distrito" Association="Self.fk_profesor_id_distrito">
+      <End Role="DISTRITO" EntitySet="DISTRITO" />
+      <End Role="PROFESOR" EntitySet="PROFESOR" />
+    </AssociationSet>
+    <AssociationSet Name="fk_matricula_curso_id_matricula" Association="Self.fk_matricula_curso_id_matricula">
+      <End Role="MATRICULA" EntitySet="MATRICULA" />
+      <End Role="MATRICULA_CURSO" EntitySet="MATRICULA_CURSO" />
+    </AssociationSet>
+    <AssociationSet Name="fk_matricula_curso_clase_id_matricula_curso" Association="Self.fk_matricula_curso_clase_id_matricula_curso">
+      <End Role="MATRICULA_CURSO" EntitySet="MATRICULA_CURSO" />
+      <End Role="MATRICULA_CURSO_CLASE" EntitySet="MATRICULA_CURSO_CLASE" />
+    </AssociationSet>
+    <AssociationSet Name="fk_nota_id_matricula_curso" Association="Self.fk_nota_id_matricula_curso">
+      <End Role="MATRICULA_CURSO" EntitySet="MATRICULA_CURSO" />
+      <End Role="NOTA" EntitySet="NOTA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_nota_id_tipo_nota" Association="Self.fk_nota_id_tipo_nota">
+      <End Role="TIPO_NOTA" EntitySet="TIPO_NOTA" />
+      <End Role="NOTA" EntitySet="NOTA" />
+    </AssociationSet>
+    <AssociationSet Name="fk_profesor_curso_dni_pro" Association="Self.fk_profesor_curso_dni_pro">
+      <End Role="PROFESOR" EntitySet="PROFESOR" />
+      <End Role="PROFESOR_CURSO" EntitySet="PROFESOR_CURSO" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ISILNotasModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ISILNotasModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="usp_ActualizarAlumno">
+      <Parameter Name="dni_alu" Mode="In" Type="Int32" />
+      <Parameter Name="app_alu" Mode="In" Type="String" />
+      <Parameter Name="apm_alu" Mode="In" Type="String" />
+      <Parameter Name="nom_alu" Mode="In" Type="String" />
+      <Parameter Name="direccion" Mode="In" Type="String" />
+      <Parameter Name="telefono" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="edad" Mode="In" Type="Int32" />
+      <Parameter Name="nacionalidad" Mode="In" Type="String" />
+      <Parameter Name="id_carrera" Mode="In" Type="Int32" />
+      <Parameter Name="id_distrito" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ActualizarCurso">
+      <Parameter Name="id_curso" Mode="In" Type="Int32" />
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="credito" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ActualizarProfesor">
+      <Parameter Name="dni_pro" Mode="In" Type="Int32" />
+      <Parameter Name="app_pro" Mode="In" Type="String" />
+      <Parameter Name="apm_pro" Mode="In" Type="String" />
+      <Parameter Name="nom_pro" Mode="In" Type="String" />
+      <Parameter Name="direccion" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="id_distrito" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarAlumno" ReturnType="Collection(ISILNotasModel.usp_ConsultarAlumno_Result)">
+      <Parameter Name="dni_alu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarCarrera" ReturnType="Collection(ISILNotasModel.usp_ConsultarCarrera_Result)">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarCurso" ReturnType="Collection(ISILNotasModel.usp_ConsultarCurso_Result)">
+      <Parameter Name="id_curso" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarDistrito" ReturnType="Collection(ISILNotasModel.usp_ConsultarDistrito_Result)">
+      <Parameter Name="id_distrito" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarDistritoAlumno" ReturnType="Collection(ISILNotasModel.usp_ConsultarDistritoAlumno_Result)">
+      <Parameter Name="id_distrito" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarNotasAlumno" ReturnType="Collection(ISILNotasModel.usp_ConsultarNotasAlumno_Result)">
+      <Parameter Name="dni_alu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarProfesor" ReturnType="Collection(ISILNotasModel.usp_ConsultarProfesor_Result)">
+      <Parameter Name="dni_pro" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ConsultarSede" ReturnType="Collection(ISILNotasModel.usp_ConsultarSede_Result)">
+      <Parameter Name="id_sede" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ListarAlumno" ReturnType="Collection(ISILNotasModel.usp_ListarAlumno_Result)" />
+    <FunctionImport Name="usp_ListarCarrera" ReturnType="Collection(ISILNotasModel.usp_ListarCarrera_Result)" />
+    <FunctionImport Name="usp_ListarCurso" ReturnType="Collection(ISILNotasModel.usp_ListarCurso_Result)" />
+    <FunctionImport Name="usp_ListarDistrito" ReturnType="Collection(ISILNotasModel.usp_ListarDistrito_Result)" />
+    <FunctionImport Name="usp_ListarProfesor" ReturnType="Collection(ISILNotasModel.usp_ListarProfesor_Result)" />
+    <FunctionImport Name="usp_ListarSede" ReturnType="Collection(ISILNotasModel.usp_ListarSede_Result)" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarAlumno_Result">
+    <Property Type="Int32" Name="dni_alu" Nullable="false" />
+    <Property Type="String" Name="app_alu" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="apm_alu" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="nom_alu" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="direccion" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="telefono" Nullable="true" MaxLength="11" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="edad" Nullable="true" />
+    <Property Type="String" Name="nacionalidad" Nullable="true" MaxLength="40" />
+    <Property Type="Int32" Name="id_carrera" Nullable="true" />
+    <Property Type="Int32" Name="id_distrito" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarCarrera_Result">
+    <Property Type="Int32" Name="id_carrera" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="70" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarCurso_Result">
+    <Property Type="Int32" Name="id_curso" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="credito" Nullable="true" />
+    <Property Type="Int32" Name="id_sede" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarDistrito_Result">
+    <Property Type="Int32" Name="id_distrito" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="80" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarDistritoAlumno_Result">
+    <Property Type="Int32" Name="DNI" Nullable="false" />
+    <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="Nombres" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="80" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarNotasAlumno_Result">
+    <Property Type="Int32" Name="dni" Nullable="false" />
+    <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="Nombres" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="Nombre_de_Curso" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="credito" Nullable="true" />
+    <Property Type="Double" Name="Nota" Nullable="true" />
+    <Property Type="String" Name="Tipo_de_Nota" Nullable="true" MaxLength="40" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarProfesor_Result">
+    <Property Type="Int32" Name="dni_pro" Nullable="false" />
+    <Property Type="String" Name="app_pro" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="apm_pro" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="nom_pro" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="direccion" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="id_distrito" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_ConsultarSede_Result">
+    <Property Type="Int32" Name="id_sede" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="40" />
+  </ComplexType>
+  <ComplexType Name="usp_ListarAlumno_Result">
+    <Property Type="Int32" Name="dni_alu" Nullable="false" />
+    <Property Type="String" Name="app_alu" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="apm_alu" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="nom_alu" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="direccion" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="telefono" Nullable="true" MaxLength="11" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="edad" Nullable="true" />
+    <Property Type="Int32" Name="id_carrera" Nullable="true" />
+    <Property Type="Int32" Name="id_distrito" Nullable="true" />
+    <Property Type="String" Name="nacionalidad" Nullable="true" MaxLength="40" />
+  </ComplexType>
+  <ComplexType Name="usp_ListarCarrera_Result">
+    <Property Type="Int32" Name="id_carrera" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="70" />
+  </ComplexType>
+  <ComplexType Name="usp_ListarCurso_Result">
+    <Property Type="Int32" Name="id_curso" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="80" />
+    <Property Type="Int32" Name="credito" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_ListarDistrito_Result">
+    <Property Type="Int32" Name="id_distrito" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="80" />
+  </ComplexType>
+  <ComplexType Name="usp_ListarProfesor_Result">
+    <Property Type="Int32" Name="dni_pro" Nullable="false" />
+    <Property Type="String" Name="app_pro" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="apm_pro" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="nom_pro" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="direccion" Nullable="true" MaxLength="70" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="id_distrito" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_ListarSede_Result">
+    <Property Type="Int32" Name="id_sede" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="40" />
+  </ComplexType>
+</Schema>
